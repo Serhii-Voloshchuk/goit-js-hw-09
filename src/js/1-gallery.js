@@ -94,5 +94,10 @@ fragments.appendChild(listItem);
 
 gallery.appendChild(fragments);
 
-let lightbox = new SimpleLightbox('.gallery a',{ /* options */ });
+let lightbox = new SimpleLightbox('.gallery a',{ 
+    captions: true,
+    captionsData: 'alt',
+    captionDelay: 250
+
+});
 
