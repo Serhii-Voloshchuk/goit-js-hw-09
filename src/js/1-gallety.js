@@ -81,7 +81,7 @@ link.classList.add('gallery-link');
 link.href = image.original;
 
 const img = document.createElement('img');
-// img.style.width = '360px';
+
 img.classList.add('gallery-image');
 img.src = image.preview;
 img.alt = image.description; 
@@ -95,6 +95,3 @@ fragments.appendChild(listItem);
 gallery.appendChild(fragments);
 
 let lightbox = new SimpleLightbox('.gallery a');
-
-
-
