@@ -94,4 +94,5 @@ fragments.appendChild(listItem);
 
 gallery.appendChild(fragments);
 
-let lightbox = new SimpleLightbox('.gallery a');
+let lightbox = new SimpleLightbox('ul.gallery.gallery-link');
+
