@@ -1,38 +1,64 @@
 const formData = {
-    email: "",
-    message: ""
+  email: "",
+  message: ""
+};
+
+function loadFormData() {
+  const savedData = localStorage.getItem('feedback-form-state');
+  if (savedData) {
+      return JSON.parse(savedData);
+  }
+  return formData;
 }
 
-const inputEmail = document.querySelectorAll('input');
-const inputTextarea = document.querySelector('textarea');
+function saveFormData(data) {
+  localStorage.setItem('feedback-form-state', JSON.stringify(data));
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('feedbackForm');
+  const savedFormData = loadFormData();
 
+  form.elements.email.value = savedFormData.email;
+  form.elements.message.value = savedFormData.message;
 
+  formData.email = savedFormData.email;
+  formData.message = savedFormData.message;
 
-// Функция для загрузки данных из локального хранилища
-// function loadFormData() {
-//     const savedData = localStorage.getItem('feedback-form-state');
-//     if (savedData) {
-//       formData = JSON.parse(savedData);
-//       document.querySelector('.feedback-form input[name="email"]').value = formData.email;
-//       document.querySelector('.feedback-form textarea[name="message"]').value = formData.message;
-//     }
-//   }
+  form.addEventListener('input', (event) => {
+      const target = event.target;
+
+      if (target.name === 'email' || target.name === 'message') {
+      
+          formData[target.name] = target.value;
+
+        
+          saveFormData(formData);
+      }
+  });
+
+  form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
   
-  // Функция для сохранения данных в локальное хранилище
-//   function saveFormData() {
-//     localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-//   }
-  
-  // Загрузка данных при загрузке скрипта
-//   loadFormData();
-  
-//   // Использование делегирования для отслеживания изменений в форме
-//   document.querySelector('.feedback-form').addEventListener('input', (event) => {
-//     if (event.target.name === 'email') {
-//       formData.email = event.target.value;
-//     } else if (event.target.name === 'message') {
-//       formData.message = event.target.value;
-//     }
-//     saveFormData();
-//   });
+      if (!formData.email || !formData.message) {
+          alert('Fill please all fields');
+      } else {
+        
+          console.log(formData);
+
+
+          localStorage.removeItem('feedback-form-state');
+          formData.email = "";
+          formData.message = "";
+          form.elements.email.value = "";
+          form.elements.message.value = "";
+      }
+  });
+});
+
+
+
+
+
+
