@@ -16,7 +16,7 @@ function saveFormData(data) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('feedbackForm');
+  const form = document.querySelector('.feedback-form');
   const savedFormData = loadFormData();
 
   form.elements.email.value = savedFormData.email;
